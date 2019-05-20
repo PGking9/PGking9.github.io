@@ -20,7 +20,7 @@
 <meta property="og:url" content="http://yoursite.com/tags/index.html">
 <meta property="og:site_name" content="idle的个人博客">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-05-14T07:14:53.399Z">
+<meta property="og:updated_time" content="2019-05-20T13:20:00.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="idle的个人博客">
 
@@ -30,8 +30,6 @@
     <link rel="alternate" href="/atom.xml" title="idle的个人博客" type="application/atom+xml">
 
 
-
-    <link rel="shortcut icon" href="/favicon.png">
 
 
 
@@ -70,7 +68,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: 
+        search: false
     }
 </script>
 
@@ -104,6 +102,13 @@
         <p class="header-subtitle">谁终将声震人间，必长久深自缄默。</p>
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
         
 
 
@@ -172,8 +177,6 @@
                             
                                 <a class="fa GitHub" href="https://github.com/" title="GitHub"></a>
                             
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
                         </ul>
                     </nav>
                 </section>
@@ -204,7 +207,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">你不回头，怎知我没来过！</div>
+                    <div id="js-aboutme">true</div>
                 </section>
                 
             </div>
@@ -250,8 +253,6 @@
                             
                                 <a class="fa GitHub" target="_blank" href="https://github.com/" title="GitHub"></a>
                             
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
                         </ul>
             </nav>
         </header>                
@@ -262,7 +263,7 @@
   
     <div class="article-meta">
       <a href="/tags/index.html" class="article-date">
-      <time datetime="2019-05-14T07:14:53.399Z" itemprop="datePublished">2019-05-14</time>
+      <time datetime="2019-05-20T13:20:00.080Z" itemprop="datePublished">2019-05-20</time>
 </a>
 
 
@@ -449,7 +450,7 @@
                 $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
             }
             else {
-                var backgroundnum = 1;
+                var backgroundnum = 3;
                 var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }
