@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[中国象棋将帅问题]]></title>
+    <url>%2F2019%2F06%2F02%2F%E4%B8%AD%E5%9B%BD%E8%B1%A1%E6%A3%8B%E5%B0%86%E5%B8%85%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[—–题目描述—– 在中国象棋里将和帅是不能碰面的，如下图所示，当将位于d10时，帅就不能在d1,、d2、d3(如图所示)。请写一个程序，输出将、帅所有的合法位置。要求在代码中仅用一个变量。 —–题目分析—– 将帅与将的活动区域简化成一个九宫格 先不考虑一个变量这个条件，可以取两个变量i和j分别代表将和帅的位置，用两个循环遍历并比较是否在一条线上。(见代码a) 考虑一个变量这个条件，怎么用一个变量来表示将帅两个不同位置。(见代码b) 代码 代码a 12345678910111213public class Solution &#123; public static void main(String[] args) &#123; for (int i=0;i&lt;9;i++)&#123; for (int j=0;j&lt;9;j++)&#123; if (i%3==j%3)&#123; continue; &#125;else&#123; System.out.println("象棋对应的位置为："+"("+(i+1)+","+(j+1)+")"); &#125; &#125; &#125; &#125;&#125; 代码b 123456789101112public class Solution &#123; public static void main(String[] args) &#123; byte s=81; while ((s--)!=0)&#123; if ((s/9%3)==(s%9%3)) &#123; continue; &#125;else &#123; System.out.println("象棋对应位置为："+"("+(s/9+1)+","+(s%9+1)+")"); &#125; &#125; &#125;&#125; 解析： 巧用s/9和s%9，s从80到72，s/9的结果一直为8而s%9的结果是从8到0.byte s=81是为了简化程序，byte s=80是可以的，需要简单的改一下。]]></content>
+      <categories>
+        <category>编程之美</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[删除排序数组中的重复项]]></title>
     <url>%2F2019%2F06%2F01%2F%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%2F</url>
-    <content type="text"><![CDATA[题目描述 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 解题分析 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。示例 :给定 nums = [0,0,1,1,1,2,2,3,3,4],函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。你不需要考虑数组中超出新长度后面的元素。 代码 1234567891011121314class Solution &#123; public int removeDuplicates(int[] nums) &#123; int length=1; for(int i=1;i&lt;nums.length;i++)&#123; while(i&lt;nums.length&amp;&amp;nums[i]==nums[i-1])&#123; i++; &#125; if(i&lt;nums.length)&#123; nums[length++]=nums[i]; &#125; &#125; return length; &#125;&#125; 12执行用时 : 2 ms内存消耗 : 44 MB]]></content>
+    <content type="text"><![CDATA[—–题目描述—– 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 —–题目分析—– 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。示例 :给定 nums = [0,0,1,1,1,2,2,3,3,4],函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。你不需要考虑数组中超出新长度后面的元素。 —–代码—– 1234567891011121314class Solution &#123; public int removeDuplicates(int[] nums) &#123; int length=1; for(int i=1;i&lt;nums.length;i++)&#123; while(i&lt;nums.length&amp;&amp;nums[i]==nums[i-1])&#123; i++; &#125; if(i&lt;nums.length)&#123; nums[length++]=nums[i]; &#125; &#125; return length; &#125;&#125; 12执行用时 : 2 ms内存消耗 : 44 MB]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
@@ -16,7 +28,7 @@
   <entry>
     <title><![CDATA[罗马数字转整数]]></title>
     <url>%2F2019%2F05%2F31%2F%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目描述 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 v 5 x 10 L 50 C 100 D 500 M 1000 解题分析 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 解题思路 本题是由一个标签值查找另一个标签值，很容易想到Map键对值，通过key去查找value。 代码 12345678910111213141516171819202122232425262728293031class Solution &#123; public int romanToInt(String s) &#123; Map&lt;Character,Integer&gt; map=new HashMap&lt;&gt;(); map.put('I', 1); map.put('V', 5); map.put('X', 10); map.put('L', 50); map.put('C', 100); map.put('D', 500); map.put('M', 1000); int temp=0; for(int i=0;i&lt;s.length();i++)&#123; /** * 如果不是数组最后最后一项或者是数组倒数第二项 * 1、i为数组最后一项只有可能执行temp+=map.get(s.charAt(i));(没有下一项进行比较)为了防止数组下标越界，只能在最后加上最后一项 * 2、i为倒数第二项，如果执行判断语句后 */ if(i!=s.length()-1)&#123; if(map.get(s.charAt(i))&lt;map.get(s.charAt(i+1)))&#123; temp+=map.get(s.charAt(i+1))-map.get(s.charAt(i)); i++; &#125;else&#123; temp+=map.get(s.charAt(i)); &#125; &#125;else&#123; temp+=map.get(s.charAt(s.length()-1)); &#125; &#125; return temp; &#125;&#125; 12执行用时 : 33 ms内存消耗 : 40 MB]]></content>
+    <content type="text"><![CDATA[—–题目描述—– 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 v 5 x 10 L 50 C 100 D 500 M 1000 —–题目分析—– 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 —–代码—– 12345678910111213141516171819202122232425262728293031class Solution &#123; public int romanToInt(String s) &#123; Map&lt;Character,Integer&gt; map=new HashMap&lt;&gt;(); map.put('I', 1); map.put('V', 5); map.put('X', 10); map.put('L', 50); map.put('C', 100); map.put('D', 500); map.put('M', 1000); int temp=0; for(int i=0;i&lt;s.length();i++)&#123; /** * 如果不是数组最后最后一项或者是数组倒数第二项 * 1、i为数组最后一项只有可能执行temp+=map.get(s.charAt(i));(没有下一项进行比较)为了防止数组下标越界，只能在最后加上最后一项 * 2、i为倒数第二项，如果执行判断语句后 */ if(i!=s.length()-1)&#123; if(map.get(s.charAt(i))&lt;map.get(s.charAt(i+1)))&#123; temp+=map.get(s.charAt(i+1))-map.get(s.charAt(i)); i++; &#125;else&#123; temp+=map.get(s.charAt(i)); &#125; &#125;else&#123; temp+=map.get(s.charAt(s.length()-1)); &#125; &#125; return temp; &#125;&#125; 解析： 本题是由一个标签值查找另一个签值，很容易想到Map键对值，通过key去查找value。 12执行用时 : 33 ms内存消耗 : 40 MB]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
