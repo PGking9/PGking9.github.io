@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[单链表一个有趣的问题]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[—–题目描述—– 在学习单链表的时候发现一个有趣的问题，看下面的代码一与代码二，在逻辑上似乎相同，但是执行的结果却不相同，究竟是为什么？ 代码一： 12345678910111213141516171819public class SingleLinkedList &#123; public static void main(String[] args) &#123; Node n1=new Node(1); Node n2=new Node(2); Node n3=new Node(3); Node n4=new Node(4); n1.next=n2; n2.next=n3; n3.next=n4; Node temp=n1; while(temp.next!=null)&#123; temp=temp.next; &#125; temp.next=new Node(10); System.out.println(n1.next.next.next.next.val); &#125;&#125; 代码二： 12345678910111213141516171819public class SingleLinkedList &#123; public static void main(String[] args) &#123; Node n1=new Node(1); Node n2=new Node(2); Node n3=new Node(3); Node n4=new Node(4); n1.next=n2; n2.next=n3; n3.next=n4; Node temp=n1; while(temp!=null)&#123; temp=temp.next; &#125; temp=new Node(10); System.out.println(n1.next.next.next.next.val); &#125;&#125; 如果有想法大家可以在评论区交流交流。]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构与算法</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[中国象棋将帅问题]]></title>
     <url>%2F2019%2F06%2F02%2F%E4%B8%AD%E5%9B%BD%E8%B1%A1%E6%A3%8B%E5%B0%86%E5%B8%85%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[—–题目描述—– 在中国象棋里将和帅是不能碰面的，如下图所示，当将位于d10时，帅就不能在d1,、d2、d3(如图所示)。请写一个程序，输出将、帅所有的合法位置。要求在代码中仅用一个变量。 —–题目分析—– 将帅与将的活动区域简化成一个九宫格 先不考虑一个变量这个条件，可以取两个变量i和j分别代表将和帅的位置，用两个循环遍历并比较是否在一条线上。(见代码a) 考虑一个变量这个条件，怎么用一个变量来表示将帅两个不同位置。(见代码b) 代码 代码a 12345678910111213public class Solution &#123; public static void main(String[] args) &#123; for (int i=0;i&lt;9;i++)&#123; for (int j=0;j&lt;9;j++)&#123; if (i%3==j%3)&#123; continue; &#125;else&#123; System.out.println("象棋对应的位置为："+"("+(i+1)+","+(j+1)+")"); &#125; &#125; &#125; &#125;&#125; 代码b 123456789101112public class Solution &#123; public static void main(String[] args) &#123; byte s=81; while ((s--)!=0)&#123; if ((s/9%3)==(s%9%3)) &#123; continue; &#125;else &#123; System.out.println("象棋对应位置为："+"("+(s/9+1)+","+(s%9+1)+")"); &#125; &#125; &#125;&#125; 解析： 巧用s/9和s%9，s从80到72，s/9的结果一直为8而s%9的结果是从8到0.byte s=81是为了简化程序，byte s=80是可以的，需要简单的改一下。]]></content>
