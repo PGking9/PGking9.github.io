@@ -1,51 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[单链表一个有趣的问题]]></title>
-    <url>%2F2019%2F07%2F14%2F%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[—–题目描述—– 在学习单链表的时候发现一个有趣的问题，看下面的代码一与代码二，在逻辑上似乎相同，但是执行的结果却不相同，究竟是为什么？ 代码一： 12345678910111213141516171819public class SingleLinkedList &#123; public static void main(String[] args) &#123; Node n1=new Node(1); Node n2=new Node(2); Node n3=new Node(3); Node n4=new Node(4); n1.next=n2; n2.next=n3; n3.next=n4; Node temp=n1; while(temp.next!=null)&#123; temp=temp.next; &#125; temp.next=new Node(10); System.out.println(n1.next.next.next.next.val); &#125;&#125; 代码二： 12345678910111213141516171819public class SingleLinkedList &#123; public static void main(String[] args) &#123; Node n1=new Node(1); Node n2=new Node(2); Node n3=new Node(3); Node n4=new Node(4); n1.next=n2; n2.next=n3; n3.next=n4; Node temp=n1; while(temp!=null)&#123; temp=temp.next; &#125; temp=new Node(10); System.out.println(n1.next.next.next.next.val); &#125;&#125; 如果有想法大家可以在评论区交流交流。]]></content>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构与算法</tag>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[中国象棋将帅问题]]></title>
-    <url>%2F2019%2F06%2F02%2F%E4%B8%AD%E5%9B%BD%E8%B1%A1%E6%A3%8B%E5%B0%86%E5%B8%85%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[—–题目描述—– 在中国象棋里将和帅是不能碰面的，如下图所示，当将位于d10时，帅就不能在d1,、d2、d3(如图所示)。请写一个程序，输出将、帅所有的合法位置。要求在代码中仅用一个变量。 —–题目分析—– 将帅与将的活动区域简化成一个九宫格 先不考虑一个变量这个条件，可以取两个变量i和j分别代表将和帅的位置，用两个循环遍历并比较是否在一条线上。(见代码a) 考虑一个变量这个条件，怎么用一个变量来表示将帅两个不同位置。(见代码b) 代码 代码a 12345678910111213public class Solution &#123; public static void main(String[] args) &#123; for (int i=0;i&lt;9;i++)&#123; for (int j=0;j&lt;9;j++)&#123; if (i%3==j%3)&#123; continue; &#125;else&#123; System.out.println("象棋对应的位置为："+"("+(i+1)+","+(j+1)+")"); &#125; &#125; &#125; &#125;&#125; 代码b 123456789101112public class Solution &#123; public static void main(String[] args) &#123; byte s=81; while ((s--)!=0)&#123; if ((s/9%3)==(s%9%3)) &#123; continue; &#125;else &#123; System.out.println("象棋对应位置为："+"("+(s/9+1)+","+(s%9+1)+")"); &#125; &#125; &#125;&#125; 解析： 巧用s/9和s%9，s从80到72，s/9的结果一直为8而s%9的结果是从8到0.byte s=81是为了简化程序，byte s=80是可以的，需要简单的改一下。]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>两数之和</title>
+      <link href="/2019/07/14/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+      <url>/2019/07/14/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><p>给出两个<font color="tomato"> 非空 </font>的链表用来表示两个非负的整数。其中，它们各自的位数是按照 <font color="tomato">逆序</font>的方式存储的，并且它们的每个节点只能存储 <font color="tomato">一位</font> 数字。如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p><a id="more"></a><center><font size="4" color="powderblue"><b>—–题目分析—–</b></font></center><p>1、两个非空链表不同时为空。</p><p>2、因为是加法必须要考虑进位，且进位的可能性只有两种0或1。</p><p>3、一个链表只要有头节点就能将其表示出来</p><p>4、得到的新链表必须有pre和cur两个节点共同完成。</p><center><font size="4" color="powderblue"><b>代码</b></font></center><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        ListNode pre=<span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">         ListNode p=l1;</span><br><span class="line">         ListNode q=l2;</span><br><span class="line">         ListNode cur=pre;</span><br><span class="line">        <span class="keyword">int</span> carry=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="keyword">null</span>||q!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> x=p!=<span class="keyword">null</span>?p.val:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> y=q!=<span class="keyword">null</span>?q.val:<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> sum=x+y+carry;</span><br><span class="line">            carry=sum/<span class="number">10</span>;</span><br><span class="line">            </span><br><span class="line">            cur.next=<span class="keyword">new</span> ListNode(sum%<span class="number">10</span>);</span><br><span class="line">            cur=cur.next;</span><br><span class="line">            <span class="keyword">if</span>(p!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                p=p.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(q!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                q=q.next;</span><br><span class="line">            &#125;               </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry==<span class="number">1</span>)&#123;</span><br><span class="line">            cur.next=<span class="keyword">new</span> ListNode(<span class="number">1</span>);           </span><br><span class="line">        &#125;        </span><br><span class="line">        <span class="keyword">return</span> pre.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><font color="tomato">注意:</font>为什么返回的是pre.next(应为其指向的是链表的第一节点，值为两个链表节点和的第一个值，pre节点的值为0)，而为什么只使用cur一个节点？（cur在while循环中指向的节点早已偏离了第一个节点）</p>]]></content>
+      
+      
       <categories>
-        <category>编程之美</category>
+          
+          <category> LeetCode </category>
+          
       </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[删除排序数组中的重复项]]></title>
-    <url>%2F2019%2F06%2F01%2F%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%2F</url>
-    <content type="text"><![CDATA[—–题目描述—– 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 —–题目分析—– 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。示例 :给定 nums = [0,0,1,1,1,2,2,3,3,4],函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。你不需要考虑数组中超出新长度后面的元素。 —–代码—– 1234567891011121314class Solution &#123; public int removeDuplicates(int[] nums) &#123; int length=1; for(int i=1;i&lt;nums.length;i++)&#123; while(i&lt;nums.length&amp;&amp;nums[i]==nums[i-1])&#123; i++; &#125; if(i&lt;nums.length)&#123; nums[length++]=nums[i]; &#125; &#125; return length; &#125;&#125; 12执行用时 : 2 ms内存消耗 : 44 MB]]></content>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构与算法 </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>单链表一个有趣的问题</title>
+      <link href="/2019/07/14/%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/07/14/%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[ <center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><p>在学习单链表的时候发现一个有趣的问题，看下面的代码一与代码二，在逻辑上似乎相同，但是执行的结果却不相同，究竟是为什么？</p><a id="more"></a><p>代码一：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedList</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Node n1=<span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">        Node n2=<span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node n3=<span class="keyword">new</span> Node(<span class="number">3</span>);</span><br><span class="line">        Node n4=<span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        n1.next=n2;</span><br><span class="line">        n2.next=n3;</span><br><span class="line">        n3.next=n4;</span><br><span class="line"></span><br><span class="line">     Node temp=n1;</span><br><span class="line">     <span class="keyword">while</span>(temp.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">         temp=temp.next;</span><br><span class="line">     &#125;</span><br><span class="line">     temp.next=<span class="keyword">new</span> Node(<span class="number">10</span>);</span><br><span class="line">     System.out.println(n1.next.next.next.next.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>代码二：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleLinkedList</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Node n1=<span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">        Node n2=<span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node n3=<span class="keyword">new</span> Node(<span class="number">3</span>);</span><br><span class="line">        Node n4=<span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">        n1.next=n2;</span><br><span class="line">        n2.next=n3;</span><br><span class="line">        n3.next=n4;</span><br><span class="line"></span><br><span class="line">     Node temp=n1;</span><br><span class="line">     <span class="keyword">while</span>(temp!=<span class="keyword">null</span>)&#123;</span><br><span class="line">         temp=temp.next;</span><br><span class="line">     &#125;</span><br><span class="line">     temp=<span class="keyword">new</span> Node(<span class="number">10</span>);</span><br><span class="line">     System.out.println(n1.next.next.next.next.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果有想法大家可以在评论区交流交流。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构与算法 </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>中国象棋将帅问题</title>
+      <link href="/2019/06/02/%E4%B8%AD%E5%9B%BD%E8%B1%A1%E6%A3%8B%E5%B0%86%E5%B8%85%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/06/02/%E4%B8%AD%E5%9B%BD%E8%B1%A1%E6%A3%8B%E5%B0%86%E5%B8%85%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><p>在中国象棋里将和帅是不能碰面的，如下图所示，当将位于d10时，帅就不能在d1,、d2、d3(如图所示)。请写一个程序，输出将、帅所有的合法位置。要求在代码中<font color="tomato">仅用一个变量</font>。</p><a id="more"></a><p><img src="https://img-blog.csdn.net/20150921225106357" alt="这里写图片描述"></p><center><font size="4" color="powderblue"><b>—–题目分析—–</b></font></center><p>将帅与将的活动区域简化成一个九宫格</p><p><img src="https://img-blog.csdn.net/20150921225126934" alt></p><ul><li>先不考虑一个变量这个条件，可以取两个变量i和j分别代表将和帅的位置，用两个循环遍历并比较是否在一条线上。(见代码a)</li><li>考虑一个变量这个条件，怎么用一个变量来表示将帅两个不同位置。(见代码b)</li></ul><center><font size="4" color="powderblue"><b>代码</b></font></center><ul><li>代码a</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">9</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (i%<span class="number">3</span>==j%<span class="number">3</span>)&#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    System.out.println(<span class="string">"象棋对应的位置为："</span>+<span class="string">"("</span>+(i+<span class="number">1</span>)+<span class="string">","</span>+(j+<span class="number">1</span>)+<span class="string">")"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>代码b</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span> s=<span class="number">81</span>;</span><br><span class="line">        <span class="keyword">while</span> ((s--)!=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> ((s/<span class="number">9</span>%<span class="number">3</span>)==(s%<span class="number">9</span>%<span class="number">3</span>)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">"象棋对应位置为："</span>+<span class="string">"("</span>+(s/<span class="number">9</span>+<span class="number">1</span>)+<span class="string">","</span>+(s%<span class="number">9</span>+<span class="number">1</span>)+<span class="string">")"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><font color="tomato">解析：</font><p>巧用s/9和s%9，s从80到72，s/9的结果一直为8而s%9的结果是从8到0.byte  s=81是为了简化程序，byte  s=80是可以的，需要简单的改一下。 </p>]]></content>
+      
+      
       <categories>
-        <category>LeetCode</category>
+          
+          <category> 编程之美 </category>
+          
       </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构与算法</tag>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[罗马数字转整数]]></title>
-    <url>%2F2019%2F05%2F31%2F%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[—–题目描述—– 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 v 5 x 10 L 50 C 100 D 500 M 1000 —–题目分析—– 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 —–代码—– 12345678910111213141516171819202122232425262728293031class Solution &#123; public int romanToInt(String s) &#123; Map&lt;Character,Integer&gt; map=new HashMap&lt;&gt;(); map.put('I', 1); map.put('V', 5); map.put('X', 10); map.put('L', 50); map.put('C', 100); map.put('D', 500); map.put('M', 1000); int temp=0; for(int i=0;i&lt;s.length();i++)&#123; /** * 如果不是数组最后最后一项或者是数组倒数第二项 * 1、i为数组最后一项只有可能执行temp+=map.get(s.charAt(i));(没有下一项进行比较)为了防止数组下标越界，只能在最后加上最后一项 * 2、i为倒数第二项，如果执行判断语句后 */ if(i!=s.length()-1)&#123; if(map.get(s.charAt(i))&lt;map.get(s.charAt(i+1)))&#123; temp+=map.get(s.charAt(i+1))-map.get(s.charAt(i)); i++; &#125;else&#123; temp+=map.get(s.charAt(i)); &#125; &#125;else&#123; temp+=map.get(s.charAt(s.length()-1)); &#125; &#125; return temp; &#125;&#125; 解析： 本题是由一个标签值查找另一个签值，很容易想到Map键对值，通过key去查找value。 12执行用时 : 33 ms内存消耗 : 40 MB]]></content>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构与算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>删除排序数组中的重复项</title>
+      <link href="/2019/06/01/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/"/>
+      <url>/2019/06/01/%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</url>
+      
+        <content type="html"><![CDATA[<center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p><a id="more"></a><center><font size="4" color="powderblue"><b>—–题目分析—–</b></font></center><p>不要使用<font color="tomato">额外的数组空间</font>，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。示例 :给定 nums = [0,0,1,1,1,2,2,3,3,4],函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。你不需要考虑数组中超出新长度后面的元素。</p><center><font size="4" color="powderblue"><b>—–代码—–</b></font></center><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeDuplicates(int[] nums) &#123;</span><br><span class="line">        int length=1;</span><br><span class="line">        for(int i=1;i&lt;nums.length;i++)&#123;</span><br><span class="line">            while(i&lt;nums.length&amp;&amp;nums[i]==nums[i-1])&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(i&lt;nums.length)&#123;</span><br><span class="line">               nums[length++]=nums[i];</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        return length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行用时 : 2 ms</span><br><span class="line">内存消耗 : 44 MB</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>LeetCode</category>
+          
+          <category> LeetCode </category>
+          
       </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构与算法</tag>
-        <tag>字符串</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构与算法 </tag>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>罗马数字转整数</title>
+      <link href="/2019/05/31/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/"/>
+      <url>/2019/05/31/%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><p>罗马数字包含以下七种字符: <code>I</code>， <code>V</code>， <code>X</code>， <code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p><a id="more"></a><table><thead><tr><th>字符</th><th style="text-align:center">数值</th></tr></thead><tbody><tr><td>I</td><td style="text-align:center">1</td></tr><tr><td>v</td><td style="text-align:center">5</td></tr><tr><td>x</td><td style="text-align:center">10</td></tr><tr><td>L</td><td style="text-align:center">50</td></tr><tr><td>C</td><td style="text-align:center">100</td></tr><tr><td>D</td><td style="text-align:center">500</td></tr><tr><td>M</td><td style="text-align:center">1000</td></tr></tbody></table><center><font size="4" color="powderblue"><b>—–题目分析—–</b></font></center><p>罗马数字 2 写做 <code>II</code> ，即为两个并列的 1。12 写做 <code>XII</code> ，即为 <code>X</code> + <code>II</code> 。 27 写做  <code>XXVII</code>, 即为 <code>XX</code> + <code>V</code> + <code>II</code> 。</p><p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 <code>IIII</code>，而是 <code>IV</code>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <code>IX</code>。这个特殊的规则只适用于以下六种情况：</p><ul><li><code>I</code> 可以放在 <code>V</code> (5) 和 <code>X</code> (10) 的左边，来表示 4 和 9。</li><li><code>X</code> 可以放在 <code>L</code> (50) 和 <code>C</code> (100) 的左边，来表示 40 和 90。 </li><li><code>C</code> 可以放在 <code>D</code> (500) 和 <code>M</code> (1000) 的左边，来表示 400 和 900。</li></ul><p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p><center><font size="4" color="powderblue"><b>—–代码—–</b></font></center><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       Map&lt;Character,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">map.put(<span class="string">'I'</span>, <span class="number">1</span>);</span><br><span class="line">map.put(<span class="string">'V'</span>, <span class="number">5</span>);</span><br><span class="line">map.put(<span class="string">'X'</span>, <span class="number">10</span>);</span><br><span class="line">map.put(<span class="string">'L'</span>, <span class="number">50</span>);</span><br><span class="line">map.put(<span class="string">'C'</span>, <span class="number">100</span>);</span><br><span class="line">map.put(<span class="string">'D'</span>, <span class="number">500</span>);</span><br><span class="line">map.put(<span class="string">'M'</span>, <span class="number">1000</span>);</span><br><span class="line"><span class="keyword">int</span> temp=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果不是数组最后最后一项或者是数组倒数第二项</span></span><br><span class="line"><span class="comment"> * 1、i为数组最后一项只有可能执行temp+=map.get(s.charAt(i));(没有下一项进行比较)为了防止数组下标越界，只能在最后加上最后一项</span></span><br><span class="line"><span class="comment"> * 2、i为倒数第二项，如果执行判断语句后</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span>(i!=s.length()-<span class="number">1</span>)&#123; </span><br><span class="line"><span class="keyword">if</span>(map.get(s.charAt(i))&lt;map.get(s.charAt(i+<span class="number">1</span>)))&#123;</span><br><span class="line">temp+=map.get(s.charAt(i+<span class="number">1</span>))-map.get(s.charAt(i));</span><br><span class="line">i++;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">temp+=map.get(s.charAt(i));</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">temp+=map.get(s.charAt(s.length()-<span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><font color="tomato">解析：</font><p>本题是由一个标签值查找另一个签值，很容易想到Map键对值，通过key去查找value。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行用时 : 33 ms</span><br><span class="line">内存消耗 : 40 MB</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LeetCode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构与算法 </tag>
+            
+            <tag> 字符串 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
