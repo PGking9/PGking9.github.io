@@ -308,6 +308,701 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/10/15/反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="henry">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/img/h1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idle的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/15/反射/" itemprop="url">反射</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T20:43:31+08:00">
+                2019-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/15/反射/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/15/反射/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="一、什么是反射"><a href="#一、什么是反射" class="headerlink" title="一、什么是反射"></a>一、什么是反射</h4><p>java反射机制是指在运行状态中，对于任意一个类，都能知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象的方法的功能成为java语言的反射机制。</p>
+<h4 id="二、反射的作用"><a href="#二、反射的作用" class="headerlink" title="二、反射的作用"></a>二、反射的作用</h4><p>之前访问一个类的属性或方法，总是需要这个类实例化一个对象去调用，现在通过反射也可以获取类的属性和方法，并且这个机制是动态获取。JDBC访问数据库时需要加载数据库提供的驱动程序（MySQL为例），Class.forName(“com.mysql.jdbc.Driver”);即可对驱动程序包下Driver类的静态方法完成加载。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           java.sql.DriverManager.registerDriver(new Driver());</span><br><span class="line">       &#125; catch (SQLException E) &#123;</span><br><span class="line">           throw new RuntimeException(&quot;Can&apos;t register driver!&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>所以常常用来编写通用性较高的代码或者框架的时候使用。</p>
+<h4 id="三、反射的常用对象"><a href="#三、反射的常用对象" class="headerlink" title="三、反射的常用对象"></a>三、反射的常用对象</h4><h6 id="1、Class"><a href="#1、Class" class="headerlink" title="1、Class"></a>1、Class</h6><ul>
+<li>class类的实例表示正在运行的Java应用程序中的类和接口</li>
+</ul>
+<h6 id="2、Constructor"><a href="#2、Constructor" class="headerlink" title="2、Constructor"></a>2、Constructor</h6><ul>
+<li><p>关于类的单个构造方法的信息以及对它的访问权限</p>
+<h6 id="3、Field"><a href="#3、Field" class="headerlink" title="3、Field"></a>3、Field</h6></li>
+<li><p>Field提供有关类或接口的单个字段的信息，以及对它的动态访问权限。</p>
+</li>
+</ul>
+<h6 id="4、Method"><a href="#4、Method" class="headerlink" title="4、Method"></a>4、Method</h6><ul>
+<li>Method提供关于类或接口上单独某个方法的信息</li>
+</ul>
+<h4 id="四、Class"><a href="#四、Class" class="headerlink" title="四、Class"></a>四、Class</h4><h6 id="1、对Class的一些理解"><a href="#1、对Class的一些理解" class="headerlink" title="1、对Class的一些理解"></a>1、对Class的一些理解</h6><ul>
+<li>Class本身就是一个类，注意与class的区别</li>
+<li>Class对象只能由系统建立（我们只能去获得Class对象）</li>
+<li>一个加载的类在JVM中只会有一个Class实例   </li>
+</ul>
+<p>实体类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line"></span><br><span class="line">	private String name;</span><br><span class="line">	private String sex;</span><br><span class="line">	private int age;</span><br><span class="line">	</span><br><span class="line">	public User() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	public User(String name, String sex, int age) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getSex() &#123;</span><br><span class="line">		return sex;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setSex(String sex) &#123;</span><br><span class="line">		this.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void eat() &#123;</span><br><span class="line">		System.out.println(&quot;我会吃东西&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;User [name=&quot; + name + &quot;, sex=&quot; + sex + &quot;, age=&quot; + age + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">		User a = new User(&quot;huahua&quot;,&quot;女&quot;,13);</span><br><span class="line">		User b = new User(&quot;mingming&quot;,&quot;男&quot;,15);</span><br><span class="line">		Class c1 = a.getClass();</span><br><span class="line">		Class c2 = b.getClass();</span><br><span class="line">		System.out.println(c1 == c2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个Class对应的是一个加载到JVM中的一个.class文件</li>
+<li>每个类的实例都会记得自己是由哪个Class实例产生</li>
+<li>通过Class可以完整地得到一个类中的所有被加载的结构</li>
+<li>Class类是Reflection的根源，针对任何你想动态加载、运行的类，唯有先获得相应的Class对象。</li>
+</ul>
+<h6 id="2、获取Class对象方式"><a href="#2、获取Class对象方式" class="headerlink" title="2、获取Class对象方式"></a>2、获取Class对象方式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">	//通过对象名来访问 Object中有getClass()方法 : 获得运行当前对象的Class文件对象</span><br><span class="line">	User u1 = new User();</span><br><span class="line">	Class c1 = u1.getClass();</span><br><span class="line">	</span><br><span class="line">	//通过Class类中forName()方法</span><br><span class="line">	Class c2 = Class.forName(&quot;test1.User&quot;);</span><br><span class="line">	</span><br><span class="line">	//通过类名来获得</span><br><span class="line">	Class c3 = User.class;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3、其他"><a href="#3、其他" class="headerlink" title="3、其他"></a>3、其他</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException </span>&#123;</span><br><span class="line">    <span class="comment">//通过包名.类名加载</span></span><br><span class="line">		<span class="comment">//c1为user.class文件的对象</span></span><br><span class="line">		<span class="comment">//u1，u2为User类的对象</span></span><br><span class="line">		Class c1 = Class.forName(<span class="string">"test1.User"</span>);</span><br><span class="line">     <span class="comment">//相当于 User user = new User（）;</span></span><br><span class="line">		User u1 = (User) c1.newInstance();</span><br><span class="line">		User u2 = (User) c1.newInstance();</span><br><span class="line">		System.out.println(u1 == u2);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="五、Constructor使用方法"><a href="#五、Constructor使用方法" class="headerlink" title="五、Constructor使用方法"></a>五、Constructor使用方法</h4><ul>
+<li>Constructor类的实例对象代表类的一个构造方法</li>
+<li>得到某个类的所有构造方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Constructor[] constructors = Class.forName(<span class="string">"java.lang.String"</span>).getConstructors();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>得到指定的构造方法并调用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException </span>&#123;</span><br><span class="line">		<span class="comment">//获取无参构造方法</span></span><br><span class="line">		Class class1 = Class.forName(<span class="string">"test1.User"</span>);</span><br><span class="line">		Constructor c1 = class1.getConstructor();</span><br><span class="line">        User user1 = (User) c1.newInstance();   <span class="comment">//相当于User user = new User();</span></span><br><span class="line">        user1.eat();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取有参构造方法</span></span><br><span class="line">        Constructor c2 = class1.getConstructor(String.class, String.class, <span class="keyword">int</span>.class);</span><br><span class="line">        <span class="comment">//相当于 User user = new User("huahua","male",20);</span></span><br><span class="line">        User user2 = (User) c2.newInstance(<span class="string">"huahua"</span>,<span class="string">"male"</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(user2.toString());      </span><br><span class="line">        </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六、Field使用方法"><a href="#六、Field使用方法" class="headerlink" title="六、Field使用方法"></a>六、Field使用方法</h4><ul>
+<li>Field类代表某个类中的一个成员变量，并提供动态访问权限</li>
+</ul>
+<p>实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"跑起来!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Person [name="</span> + name + <span class="string">", sex="</span> + sex + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FieldTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//@Test    //测试公有属性</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">demo</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    	Class class1 = Class.forName(<span class="string">"com.chr.reflect.Person"</span>);</span><br><span class="line">		Field field = class1.getField(<span class="string">"name"</span>);</span><br><span class="line">		Person person = (Person)class1.newInstance();</span><br><span class="line">		field.set(person, <span class="string">"李四"</span>);<span class="comment">//相当于 person.name = "李四";</span></span><br><span class="line">        String s = (String)field.get(person);<span class="comment">//获得该对象属性的值</span></span><br><span class="line">        System.out.println(s);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Test</span>   <span class="comment">//测试私有属性</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo_1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class class1 = Class.forName(<span class="string">"com.chr.reflect.Person"</span>);</span><br><span class="line">    	Field field = class1.getDeclaredField(<span class="string">"sex"</span>);</span><br><span class="line">    	Person p = (Person)class1.newInstance();</span><br><span class="line">    	field.setAccessible(<span class="keyword">true</span>);<span class="comment">//开启访问私有属性的权限</span></span><br><span class="line">    	field.set(p, <span class="string">"男"</span>);</span><br><span class="line">    	String s = (String)field.get(p);</span><br><span class="line">    	System.out.println(s);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="七、Method使用方法"><a href="#七、Method使用方法" class="headerlink" title="七、Method使用方法"></a>七、Method使用方法</h4><ul>
+<li>Method提供关于类或接口上单独某个方法的信息</li>
+</ul>
+<p>实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String address;</span><br><span class="line">	<span class="keyword">private</span> String tel;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Address</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Address</span><span class="params">(<span class="keyword">int</span> id, String name, String address, String tel)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.address = address;</span><br><span class="line">		<span class="keyword">this</span>.tel = tel;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Address [id="</span> + id + <span class="string">", name="</span> + name + <span class="string">", address="</span> + address + <span class="string">", tel="</span> + tel + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"> 	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"这是一个地址"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"我是私有方法"</span>);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">equalsAddress</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="string">"李明"</span>.equals(name);</span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="keyword">true</span>) &#123;</span><br><span class="line">        	System.out.println(<span class="string">"相等"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        	System.out.println(<span class="string">"不相等"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddressTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">demo</span><span class="params">()</span> <span class="keyword">throws</span> Exception  </span>&#123;</span><br><span class="line">		Class class1 = Class.forName(<span class="string">"com.chr.reflect.Address"</span>);</span><br><span class="line">		Address addr = (Address)class1.newInstance();</span><br><span class="line">	    <span class="comment">//公有方法</span></span><br><span class="line">		Method method1 = class1.getMethod(<span class="string">"display"</span>, <span class="keyword">null</span>);</span><br><span class="line">	    method1.invoke(addr, <span class="keyword">null</span>);</span><br><span class="line">	    </span><br><span class="line">	    <span class="comment">//私有方法</span></span><br><span class="line">	    Method method2 = class1.getDeclaredMethod(<span class="string">"info"</span>, <span class="keyword">null</span>);</span><br><span class="line">	    method2.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">	    method2.invoke(addr, <span class="keyword">null</span>);</span><br><span class="line">	    </span><br><span class="line">	    Method method3 = class1.getDeclaredMethod(<span class="string">"equalsAddress"</span>, String.class); </span><br><span class="line">	    method3.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">	    method3.invoke(addr,<span class="string">"李明"</span>);<span class="comment">//执行equalsAddress方法</span></span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>invoke()方法的返回的Object类型为原方法的返回类型。</p>
+<h4 id="八、反射与new有什么不同"><a href="#八、反射与new有什么不同" class="headerlink" title="八、反射与new有什么不同"></a>八、反射与new有什么不同</h4><p>1、new出来的对象无法调用类的私有属性和方法（只能通过get，set方法访问和赋值），反射出来的Field和Method对象则可以访问私有属性和方法。</p>
+<p>2、在不知道类名的情况下，就无法new出一个新的对向？但是肯定有这样的疑问，不知道类名，你怎么反射啊？</p>
+<p>那么接下来在讲讲new和反射本质上的区别，new属于静态编译（所有需要创建的对象的代码已经写好了），而反射属于动态编译，意思就说只有到运行时他才会去获得该对象的实例，可能讲的有些抽象（也有可能讲的不太正确）</p>
+<p>举例：spring框架是事先就写好的框架，他内部的处理并不知道用户要写哪些类，应为那是以后由用他的人来定的，这时候你还能在spring内部去new吗？所以用户在用的时候才去配置文件中配置类路径，这是一个典型反射的例子。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/10/12/JDBC的学习记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="henry">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/img/h1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idle的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/12/JDBC的学习记录/" itemprop="url">JDBC的学习记录---</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T16:08:34+08:00">
+                2019-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/12/JDBC的学习记录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/12/JDBC的学习记录/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="一-、什么是JDBC"><a href="#一-、什么是JDBC" class="headerlink" title="一 、什么是JDBC"></a>一 、什么是JDBC</h4><h6 id="1、背景介绍"><a href="#1、背景介绍" class="headerlink" title="1、背景介绍"></a>1、背景介绍</h6><p>JDBC : Java DataBase Connectivity   Java数据库连接</p>
+<p>sun公司在1996年发布了（JDBC）API,它的为了使Java开发人员使用java连接数据库，并用结构化查询语言（SQL）完成对数据库进行增删改查（CURD）的操作。 C : 创建（Create）  U : 更新（Update )         R : 读取（Retrieve）   D : 删除（Delete）</p>
+<h6 id="2、如何与数据库连接"><a href="#2、如何与数据库连接" class="headerlink" title="2、如何与数据库连接"></a>2、如何与数据库连接</h6><p>由于业界存在许多不同的数据库，访问数据库的网络协议并不相同，所以Java在为SQL访问提供一个API的同时，也提供了一个驱动管理器，允许使用第三方的驱动程序可以连接到特定的数据库。开发人员使用Java连接数据库的过程为：根据API编写的程序与驱动管理器进行通信，而驱动管理程序通过与实际的数据库进行通信。</p>
+<h4 id="二、连接数据库的过程"><a href="#二、连接数据库的过程" class="headerlink" title="二、连接数据库的过程"></a>二、连接数据库的过程</h4><p> 1、加载驱动</p>
+<p> 2、获得连接</p>
+<p> 3、创建执行SQL语句对象，并且执行SQL</p>
+<p> 4、释放资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">public void demo() &#123;</span><br><span class="line">		Connection conn = null;</span><br><span class="line">		Statement stmt = null;</span><br><span class="line">		ResultSet rs = null;</span><br><span class="line">		try &#123;</span><br><span class="line">		//1、加载驱动</span><br><span class="line">		Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">		</span><br><span class="line">		//2、获得连接</span><br><span class="line">	    conn = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/corporation&quot;, &quot;root&quot;, &quot;123456&quot;);</span><br><span class="line">		//3、创建执行SQL语句对象，并且执行SQL</span><br><span class="line">		String sql = &quot;SELECT * FROM goods WHERE price &lt; 3500&quot;;</span><br><span class="line">		//3.1 创建执行SQL语句的对象</span><br><span class="line">	    stmt = conn.createStatement();</span><br><span class="line">		//3.2 执行sql,获得数据集，存放的是数据表中的记录</span><br><span class="line">	    rs = stmt.executeQuery(sql);</span><br><span class="line">		while(rs.next()) &#123;</span><br><span class="line">		int id = rs.getInt(&quot;id&quot;);</span><br><span class="line">		String name = rs.getString(&quot;name&quot;);</span><br><span class="line">        Float price = rs.getFloat(&quot;price&quot;);</span><br><span class="line">        String desp = rs.getString(&quot;desp&quot;);</span><br><span class="line">        System.out.println(id+&quot; &quot;+name+&quot; &quot;+price+&quot; &quot;+desp);</span><br><span class="line">		&#125;</span><br><span class="line">		&#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">			// TODO Auto-generated catch block</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; catch (SQLException e) &#123;</span><br><span class="line">			// TODO Auto-generated catch block</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;finally &#123;</span><br><span class="line">			//4、释放资源</span><br><span class="line">			if (rs != null) &#123;</span><br><span class="line">				try &#123;</span><br><span class="line">					rs.close();</span><br><span class="line">				&#125; catch (SQLException e) &#123;</span><br><span class="line">					// TODO Auto-generated catch block</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">				rs = null;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			if(stmt != null) &#123;</span><br><span class="line">				try &#123;</span><br><span class="line">					stmt.close();</span><br><span class="line">				&#125; catch (SQLException e) &#123;</span><br><span class="line">					// TODO Auto-generated catch block</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">				stmt = null;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			if(conn != null) &#123;</span><br><span class="line">				try &#123;</span><br><span class="line">					conn.close();</span><br><span class="line">				&#125; catch (SQLException e) &#123;</span><br><span class="line">					// TODO Auto-generated catch block</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">				conn = null;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这里使用的是MySQL数据库，使用时需导入MySQL的驱动程序。</p>
+<h4 id="三、SQL注入漏洞"><a href="#三、SQL注入漏洞" class="headerlink" title="三、SQL注入漏洞"></a>三、SQL注入漏洞</h4><h6 id="1、SQL注入漏洞的由来"><a href="#1、SQL注入漏洞的由来" class="headerlink" title="1、SQL注入漏洞的由来"></a>1、SQL注入漏洞的由来</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public void test() &#123;</span><br><span class="line">	boolean flag = login(&quot;AAA &apos; or &apos;1=1&quot;,&quot;asdgasfdg&quot;);</span><br><span class="line">	if(flag == true) &#123;</span><br><span class="line">		System.out.println(&quot;登陆成功&quot;);</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		System.out.println(&quot;登陆失败&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//登录时获取用户名和密码</span><br><span class="line">public static boolean login(String username, String password) &#123;</span><br><span class="line">		Connection conn = null;</span><br><span class="line">		Statement stmt = null;</span><br><span class="line">		ResultSet rs = null;</span><br><span class="line">		boolean flag = false;</span><br><span class="line">		try &#123;</span><br><span class="line">		conn = JDBCUtils.getConnection();</span><br><span class="line">		stmt = conn.createStatement();</span><br><span class="line">		//在数据库中查询</span><br><span class="line">		String sql = &quot;select * from login where username = &apos;&quot;+username+&quot;&apos; and password = &apos;&quot;+password+&quot;&apos;&quot;;</span><br><span class="line">		rs = stmt.executeQuery(sql);</span><br><span class="line">		if(rs.next()) &#123;</span><br><span class="line">			flag = true;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			flag = false;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;catch(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;finally &#123;</span><br><span class="line">			JDBCUtils.realease(rs, stmt, conn);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return flag;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>上述的例子是用户登录时，我们从前台获取用户的姓名和密码，到数据库中查询是否存在，如果使用Statement执行sql语句，就可能存在sql的注入漏洞。比如前台传来的username = “AAA ‘ or ‘1=1”；那么无论密码是否争取，查询结果都为true。 sql语句的执行条件就会变成：</p>
+<p>username = ‘AAA’ or ‘1=1 and password = ‘adgfg’;(密码随便输入的) </p>
+<h6 id="2、如何防范注入漏洞"><a href="#2、如何防范注入漏洞" class="headerlink" title="2、如何防范注入漏洞"></a>2、如何防范注入漏洞</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public void test() &#123;</span><br><span class="line">	boolean flag = login_2(&quot;AAA &apos; or &apos;1=1&quot;,&quot;asdgasfdg&quot;);</span><br><span class="line">	if(flag == true) &#123;</span><br><span class="line">		System.out.println(&quot;登陆成功&quot;);</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		System.out.println(&quot;登陆失败&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static boolean login_2(String username, String password) &#123;</span><br><span class="line">		Connection conn = null;</span><br><span class="line">		PreparedStatement pstmt = null;</span><br><span class="line">		ResultSet rs = null;</span><br><span class="line">		boolean flag = false;</span><br><span class="line">		try &#123;</span><br><span class="line">		 conn  = JDBCUtils.getConnection();</span><br><span class="line">		 //使用？号进行占位，在传进来的变量不会在进行sql编译</span><br><span class="line">		 String sql = &quot;select * from login where username = ? and password = ?&quot;;</span><br><span class="line">		 pstmt = conn.prepareStatement(sql);</span><br><span class="line">		 //给第一个？号设置变量内容</span><br><span class="line">		 pstmt.setString(1, username);</span><br><span class="line">		 pstmt.setString(2, password);</span><br><span class="line">		 rs = pstmt.executeQuery();</span><br><span class="line">		 if (rs.next()) &#123;</span><br><span class="line">			 flag = true;</span><br><span class="line">		 &#125;else &#123;</span><br><span class="line">			 flag = false;</span><br><span class="line">		 &#125;</span><br><span class="line">		 </span><br><span class="line">		&#125;catch(Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;finally &#123;</span><br><span class="line">			JDBCUtils.realease(rs, pstmt, conn);</span><br><span class="line">		&#125;</span><br><span class="line">		return flag;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>将Statement换成PreparedStatement,再写sql语句的时候，变量用？占位，在对？进行变量赋值时，不会对该变量的内容进行sql编译。</p>
+<p>username = “AAA ‘ or ‘1=1”它就只当作一个变量的内容，而不会编译。</p>
+<h4 id="四、C3P0连接池"><a href="#四、C3P0连接池" class="headerlink" title="四、C3P0连接池"></a>四、C3P0连接池</h4><p>如果JSP或Servlet使用JDBC直接访问数据库中的数据，每一次数据访问请求都必须经历建立数据库连接、打开数据库、存取数据和关闭数据库连接等步骤，而连接并打开数据库是一件既消耗资源又费时的工作，如果频繁发生这种数据库操作，系统的性能必然会急剧下降，甚至会导致系统崩溃。数据库连接池技术是解决这个问题最常用的方法。这里使用的是C3P0连接池。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class JDBCUtils &#123;</span><br><span class="line">	</span><br><span class="line">	private static ComboPooledDataSource dataSource = new ComboPooledDataSource();</span><br><span class="line">	//创建连接对象</span><br><span class="line">	public static Connection getConnection() throws SQLException &#123;</span><br><span class="line">	Connection conn = null;</span><br><span class="line">	conn = dataSource.getConnection();</span><br><span class="line">	return conn;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//释放资源</span><br><span class="line">	</span><br><span class="line">	public static void realease(Statement stmt, Connection conn) &#123;</span><br><span class="line">		if(stmt != null) &#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				stmt.close();</span><br><span class="line">			&#125; catch (SQLException e) &#123;</span><br><span class="line">				// TODO Auto-generated catch block</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">			stmt = null;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		if(conn != null) &#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				conn.close();</span><br><span class="line">			&#125; catch (SQLException e) &#123;</span><br><span class="line">				// TODO Auto-generated catch block</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">			conn = null;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;c3p0-config&gt;</span><br><span class="line">&lt;default-config&gt;</span><br><span class="line">    &lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/corporation&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot;&gt;123456&lt;/property&gt;</span><br><span class="line">&lt;/default-config&gt;</span><br><span class="line">&lt;/c3p0-config&gt;</span><br></pre></td></tr></table></figure>
+<p>需要导入C3P0jar包，JDBC工具类用xml文件来配置数据库连接的相关信息，xml文件命名为c3p0-config.xml,且文件需放在类加载路径下（src包下） 。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/10/09/时间戳与年月日相互转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="henry">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/img/h1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idle的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/09/时间戳与年月日相互转换/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T15:26:32+08:00">
+                2019-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/09/时间戳与年月日相互转换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/09/时间戳与年月日相互转换/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>时间戳与年月日相互转换</p>
+<p>1、时间戳转年月日</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">     //获取系统当前时间的时间戳</span><br><span class="line">     Long time = System.currentTimeMillis();</span><br><span class="line">      SimpleDateFormat ft = new SimpleDateFormat(&quot;yyyy-MM-dd HH-mm-ss&quot;);  </span><br><span class="line">   System.out.println(ft.format(new Date(time)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">      </span><br><span class="line">		//十位的是以秒为单位，十三位的是以毫秒为单位</span><br><span class="line">		Long time = 1570604496L;</span><br><span class="line">		//new Date()构造器中存放的是以毫秒为单位的</span><br><span class="line">		Date date = new Date(time * 1000);</span><br><span class="line">	    //规定时间格式</span><br><span class="line">	    SimpleDateFormat ft = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">	    System.out.println(ft.format(date));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>2、年月日转时间戳</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">      String time = &quot;2019-10-09 15-01-36&quot;;</span><br><span class="line">      SimpleDateFormat ft = new SimpleDateFormat(&quot;yyyy-MM-dd HH-mm-ss&quot;);</span><br><span class="line">      try &#123;</span><br><span class="line">      //按照指定的格式将时间字符串转化成包含时间戳的Date对象</span><br><span class="line">		Date date = ft.parse(time);</span><br><span class="line">		System.out.println(date.getTime());</span><br><span class="line">	&#125; catch (ParseException e) &#123;</span><br><span class="line">		// TODO Auto-generated catch block</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;	</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/10/03/泛型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="henry">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/assets/img/h1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="idle的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/03/泛型/" itemprop="url">泛型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-03T16:06:28+08:00">
+                2019-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">基础知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/03/泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/03/泛型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文介绍一些泛型的基本知识！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/10/03/泛型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/09/25/equals与hashcode分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,498 +1938,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/06/02/中国象棋将帅问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="henry">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/assets/img/h1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idle的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/02/中国象棋将帅问题/" itemprop="url">中国象棋将帅问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-02T10:59:44+08:00">
-                2019-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程之美/" itemprop="url" rel="index">
-                    <span itemprop="name">编程之美</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/02/中国象棋将帅问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/02/中国象棋将帅问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center>
-
-<p>在中国象棋里将和帅是不能碰面的，如下图所示，当将位于d10时，帅就不能在d1,、d2、d3(如图所示)。请写一个程序，输出将、帅所有的合法位置。要求在代码中<font color="tomato">仅用一个变量</font>。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/02/中国象棋将帅问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/06/01/删除排序数组中的重复项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="henry">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/assets/img/h1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idle的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/01/删除排序数组中的重复项/" itemprop="url">删除排序数组中的重复项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T10:40:51+08:00">
-                2019-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/01/删除排序数组中的重复项/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/01/删除排序数组中的重复项/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center>
-
-
-
-<p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/01/删除排序数组中的重复项/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.idle666.top/2019/05/31/罗马数字转整数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="henry">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/assets/img/h1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="idle的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/31/罗马数字转整数/" itemprop="url">罗马数字转整数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-31T21:50:14+08:00">
-                2019-05-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/31/罗马数字转整数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/罗马数字转整数/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <center><font size="4" color="powderblue"><b>—–题目描述—–</b></font></center><br>罗马数字包含以下七种字符: <code>I</code>， <code>V</code>， <code>X</code>， <code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。<br><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/31/罗马数字转整数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1780,7 +1990,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
